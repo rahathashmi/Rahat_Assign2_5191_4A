@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="homestyle.css" />
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<title> Widget Dashboard - Rahat Hashmi </title>
+</head>
+<body>
+
+  <script>
+$.noConflict();  
+jQuery(document).ready( function() {
+
+				jQuery(".clockdiv").click(clockclick);
+                jQuery(".calendardiv").click(calendarclick);
+                jQuery(".weatherdiv").click(weatherclick);
+				jQuery("#prevdates").hide();
+				
+		function clockclick() 
+		{	
+	
+       jQuery(".return").remove();
+       jQuery(".calendardiv").hide();
+       jQuery(".weatherdiv").hide();
+
+        jQuery(".clockdiv").width(700);
+        jQuery(".clockdiv").height(600);
+		jQuery(".clockdiv").css('margin-left',250+'px');
+		jQuery(".clockdiv").css('margin-top',200+'px');
+
+        jQuery(".home").append("<button class = \"return\">Back</button>")
+            .click(function ()
+			{
+
+             jQuery(".calendardiv").show();
+             jQuery(".weatherdiv").show();
+             jQuery(".clockdiv" ).width( 360 );
+             jQuery(".clockdiv" ).height(100);
+			 jQuery(".clockdiv").css('margin-top',100+'px');
+			 jQuery('.clockdiv').css('margin-left',500 +'px');
+             jQuery(".return").remove();
+             
+			});
+		}
+				
+		function calendarclick() 
+		{
+			jQuery(".clockdiv").hide();
+			jQuery(".weatherdiv").hide();
+			jQuery(".return").remove();
+			jQuery(".calendardiv").width( screen.width-200);
+			jQuery(".calendardiv").height( 600 );
+			jQuery('#calendar').css('margin-left',430 +'px');
+			
+			
+        
+
+        jQuery(".home").append("<button class = \"return\">Back</button>")
+            .click(function (){
+
+             jQuery(".clockdiv").show();
+             jQuery(".weatherdiv").show();
+             
+            var screen=jQuery(window).width()/2.3;
+             jQuery(".calendardiv" ).width( screen );
+             jQuery(".calendardiv" ).height( 330 );
+             jQuery(".return").remove();
+			 jQuery('#calendar').css('margin-left',100 +'px');
+           
+                   
+        });
+				 
+				}
+		function weatherclick() {
+				
+				
+		jQuery(".return").remove();
+        jQuery(".prevdates").show();
+				
+        jQuery(".clockdiv").hide();
+        jQuery(".calendardiv").hide();
+
+        jQuery( '.weatherdiv' ).width( screen.width-100);
+        jQuery( '.weatherdiv' ).height( 600 );
+        jQuery( '.home' ).append("<button class = \"return\">Back</button>")
+            .click(function (){
+
+             jQuery(".clockdiv").show();
+             jQuery(".calendardiv").show();
+             
+              var screen2=jQuery(window).width()/2.3;
+             jQuery(".weatherdiv" ).width( screen2 );
+             jQuery(".weatherdiv" ).height( 330 );
+             jQuery(".return").remove();
+			 jQuery(".prevdates").hide();
+				
+        });
+		}
+
+  function displayTime() {
+    var currentTime = new Date();
+    var hours = currentTime.getHours();
+    var minutes = currentTime.getMinutes();
+    var seconds = currentTime.getSeconds();
+
+    // This gets a "handle" to the clock div in our HTML
+    var clockDiv = document.getElementById('clock');
+
+    // Then we set the text inside the clock div 
+    // to the hours, minutes, and seconds of the current time
+    clockDiv.innerText = hours + ":" + minutes + ":" + seconds;
+  
+  
+  if (seconds < 10) {
+    // Add the "0" digit to the front
+    // so 9 becomes "09"
+    seconds = "0" + seconds + " ";
+}
+
+var meridiem = "AM";  // Default is AM
+if (hours > 12) {
+    hours = hours - 12;
+    meridiem = "PM";
+}
+
+// 0 AM and 0 PM should read as 12
+if (hours === 0) {
+    hours = 12;    
+}
+clockDiv.innerText = hours + ":" + minutes + ":" + seconds + meridiem;
+}
+  setInterval(displayTime, 1000);
+
+  // This runs the displayTime function the first time
+  displayTime();
+
+});
+	var app = angular.module("myApp", []);
+var monthNames = ["January", "Feburary", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+var query = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(2211027)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
+app.controller("myAppController",function($scope) {
+    
+    $scope.days = ["Mon","Tue","Wed","Thur","Fri","Sat","Sun"];
+    
+    $scope.getCalendar=function($scope,date){
+    console.log(date.getMonth());
+    //date = (typeof (date) === 'undefined')?new Date():new Date(date); 
+    var year = date.getFullYear();
+    var month = date.getMonth();
+    var dateNow = (new Date());
+    var monthName = monthNames[month];
+    var day = date.getDate();
+    var dayInMon = (new Date(year, month + 1, 0)).getDate();
+    var minusDate = 0;
+    var weekIndex = 0;
+    var monthStartDay = new Date(year,month, 1).getDay();  
+    $scope.currMonth = monthName + ", " + year.toString();
+    $scope.dateNow = dateNow;
+    $scope.weeks = new Array([],[],[],[],[],[]);
+    monthStartDay= ( monthStartDay === 0 ) ?  7 : monthStartDay ;
+    for(var i=monthStartDay - 1;i>0;i--){
+        var preMonDate = new Date(year, month, minusDate--);
+         var day = {};
+        day.number = preMonDate.getDate();
+        day.class = "disabled";
+        day.data = day.number + "  ";
+        $scope.weeks[weekIndex].push(day);
+    }
+    $scope.weeks[weekIndex].reverse();
+    var weekRemaining = 7-$scope.weeks[0].length;
+    if(weekRemaining<1){
+        weekIndex++;
+        weekRemaining = 7;
+    }
+    var count = monthStartDay;
+    for (var dateIte = 1; dateIte < dayInMon + 1;  dateIte++) {
+        var date = new Date(year, month, dateIte);
+        var day = {};
+        day.number = date.getDate();
+        day.weather = ' ';
+        day.data = day.number + " " + day.weather;
+        if(dateNow.getDate() === date.getDate()){
+            day.class = "today";
+        }
+        var weekRemaining = 7-$scope.weeks[weekIndex].length;
+        if(weekRemaining<1){
+            weekIndex++; weekRemaining = 7;
+        }
+        $scope.weeks[weekIndex].push(day);
+        count++;
+    }
+    var count = count;
+    var plusDate = 1;
+    while (count <=42) {
+        var nextMonDate = new Date(year, month + 1, plusDate++);
+        var day = {};
+        day.number = nextMonDate.getDate();
+        day.class = "disabled";
+        day.data = day.number + "";
+        var weekRemaining = 7-$scope.weeks[weekIndex].length;
+        if(weekRemaining<1){
+            weekIndex++; weekRemaining = 7;
+        }
+        $scope.weeks[weekIndex].push(day);
+        count++;
+    } 
+        
+    }
+    var currentDate = new Date();
+    var calendarDate = new Date(currentDate);
+     $scope.getCalendar($scope,calendarDate);
+    
+    $scope.next=function(){
+        calendarDate.setMonth(calendarDate.getMonth()+1);
+        $scope.getCalendar($scope,calendarDate);
+    }
+    $scope.previous=function(){
+        calendarDate.setMonth(calendarDate.getMonth()-1);
+        $scope.getCalendar($scope,calendarDate);
+
+    }
+   
+});
+ app.factory('weatherPlugin', ['$http', '$q', function ($http, $q){
+      function getWeather() {
+        var deferred = $q.defer();
+        $http.get(query)
+        .success(function(data){deferred.resolve(data.query.results.channel);}).
+        error(function(err){deferred.reject(err);});
+        return deferred.promise;
+      }
+      return {getWeather: getWeather};
+}]);
+
+app.controller("weatherController",['$scope','weatherPlugin',function($scope,weatherPlugin){
+    weatherPlugin.getWeather().then(function(data){
+        $scope.place = data;
+    });
+}]);
+
+</script>
+<div ng-app="myApp">
+
+  <div class="home">
+          
+        <h1 id="h1home">Widget Dashboard </h1>
+
+  </div>
+  
+  <div class="clockdiv">
+  <div id="heading">DIGITAL CLOCK</div>
+  <div id='clock'></div>
+     
+  
+</div>
+
+  
+  <div class="calendardiv">
+  
+   <div ng-controller="myAppController">
+					<div id="calhead">Calendar</div>
+                    <div class="header">
+                        <p class="previous"ng-click = "previous()"></p>
+                        <p class="monthName"  ng-bind="currMonth" ></p>
+                        <p class="next" ng-click = "next()"></p>
+                    </div>
+					<div id="calendar">
+                    <div class="week names" ng-repeat="day in days">
+                            <span class="day">{{day | uppercase}}</span>
+                    </div>
+                    <div class="week" ng-repeat="week in weeks">
+                        <div ng-click="mydate()" ng-class="currDate: isNow" ng-repeat="day in week" style="display: inline-block">
+                            <span class="day" ng-class="day.class" ng-bind="day.data"></span>
+                        </div>  
+                    </div>
+                </div>
+  </div>
+  </div>
+  
+  <div class="weatherdiv">
+  
+  	  <div ng-controller="weatherController"  id="weather">
+                    <div>
+                      <h1 id="forcast">
+					  Weather Forcast: {{ place.location.city }}
+					  </h1>
+                      <h3>
+					  Current: {{ place.item.condition.text }} | {{ place.item.condition.temp }}&deg; 
+					  <img src="http://l.yimg.com/a/i/us/we/52/{{place.item.condition.code}}.gif"/>
+					  </h3>
+                      <div id="prevdates" ng-repeat="forecast in place.item.forecast | limitTo:3">
+                        <p><b>{{ forecast.date }}</b> --  {{ forecast.text }}</p>
+                        <p><i>H: {{ forecast.high }}&deg; || L: {{ forecast.low }}&deg;</i></p>
+                      </div>
+                    </div>
+                </div>
+  </div>
+  </div>
+  

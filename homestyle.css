@@ -1,0 +1,248 @@
+
+
+#calendar {
+	text-align: center;
+    display:inline-block;
+    margin: auto;
+    border:dashed 1px #orange;
+    display:table; 
+    max-width: 500px;
+	margin-left:100px;
+}
+#calendar>div.week {
+    float:left;
+    border-top:solid 1px #bbb;
+}  
+.header p{
+	
+	cursor: pointer;
+}
+h1 #forcast{
+
+	color: #111; 
+	font-family: 'Open Sans', sans-serif;
+	font-size: 32px; 
+	font-weight: bold;
+	text-align: center;
+    text-shadow: 0 2px white, 0 3px #777;
+}
+.today {
+    background:orange;
+}
+.disabled {
+    color: rgba(0,0,0,.4) !important;
+}
+.day {
+    color:#2850A7;
+    font-weight:bold;
+    width: 40px;
+    padding:6px;
+    display: table-cell;
+}
+
+body{
+	
+	background-image: url("back.jpg");
+}
+#clock {
+    height: 15%;
+    width: 25%;
+    margin: auto;
+    position: relative;
+    top: 0; left: 0; bottom: 0; right: 0;
+    padding-top: 20px;
+    font-family: courier, Courier New;
+	font-weight:bold;
+	padding-left:-20px;
+    
+    
+    font-size: 30px;
+}
+#heading{
+color: #111; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: bold;  text-align: center;
+  text-shadow: 0 2px white, 0 3px #777;
+	
+}
+#calhead{
+color: #111; font-family: 'Open Sans', sans-serif; font-size: 20px; font-weight: bold;  text-align: center;
+  text-shadow: 0 2px white, 0 3px #777;
+	
+}
+.home{
+      position: relative;
+    float: left;
+    
+
+background: #e1ffff; /* Old browsers */
+background: -moz-linear-gradient(top, #e1ffff 0%, #e1ffff 7%, #e1ffff 12%, #fdffff 12%, #e6f8fd 30%, #c8eefb 54%, #bee4f8 75%, #b1d8f5 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, #e1ffff 0%,#e1ffff 7%,#e1ffff 12%,#fdffff 12%,#e6f8fd 30%,#c8eefb 54%,#bee4f8 75%,#b1d8f5 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, #e1ffff 0%,#e1ffff 7%,#e1ffff 12%,#fdffff 12%,#e6f8fd 30%,#c8eefb 54%,#bee4f8 75%,#b1d8f5 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', endColorstr='#b1d8f5',GradientType=0 ); /* IE6-9 */
+
+     
+     width: 100%; 
+    left: -7px;  
+    right: 7px;	
+    height: 80px;
+    overflow: visible;
+    top:-7px;
+	font-weight: lighter;
+    text-align: center;
+    opacity:0.90;
+     border-radius: 21px 21px 21px 21px;
+	-moz-border-radius: 21px 21px 21px 21px;
+	-webkit-border-radius: 21px 21px 21px 21px;
+	border: 0px solid #000000;
+    color: #AAA;
+    text-shadow: 0 1px 0 #999999, 0 2px 0 #888888,
+             0 3px 0 #777777, 0 4px 0 #666666,
+             0 5px 0 #555555, 0 6px 0 #444444,
+             0 7px 0 #333333, 0 8px 7px rgba(0, 0, 0, 0.4),
+             0 9px 10px rgba(0, 0, 0, 0.2);
+	
+}
+.monthName{
+	
+	color: #111; font-family: 'Open Sans', sans-serif; font-size: 30px; font-weight: bold;  text-align: center;
+  text-shadow: 0 2px white, 0 3px #777;
+}
+.next{
+	width: 0;
+height: 0;
+position: relative;
+float:right;
+margin-top:-55px;
+border-style: solid;
+border-width: 10.5px 0 10.5px 35px;
+border-color: transparent transparent transparent #1e0082;}
+
+.previous{
+	
+	width: 0;
+height: 0;
+float:left;
+position:relative;
+margin-top:10px;
+margin-left:10px;
+border-style: solid;
+border-width: 10.5px 35px 10.5px 0;
+border-color: transparent #1e0082 transparent transparent;
+line-height: 0;
+}
+#h1home { 
+color: #111;
+ font-family: 'Helvetica Neue', sans-serif;
+ font-size: 50px;
+ font-weight: bold; 
+ letter-spacing: .1em; 
+ line-height: 0.2; 
+ text-align: center;
+   color: #AAA;
+    text-shadow: 0 1px 0 #999999, 0 2px 0 #888888,
+             0 3px 0 #777777, 0 4px 0 #666666,
+             0 5px 0 #555555, 0 6px 0 #444444,
+             0 7px 0 #333333, 0 8px 7px rgba(0, 0, 0, 0.4),
+             0 9px 10px rgba(0, 0, 0, 0.2);
+}
+
+.home button{
+
+
+  -webkit-border-radius: 38;
+  -moz-border-radius: 38;
+  border-radius: 38px;
+  font-family: Courier New;
+  color: #f0e7f0;
+  font-size: 36px;
+  background: #1d384a;
+  padding: 8px 22px 7px 20px;
+  text-decoration: none;
+  
+}
+
+.home button:hover {
+  background: #25343d;
+  background-image: -webkit-linear-gradient(top, #25343d, #3498db);
+  background-image: -moz-linear-gradient(top, #25343d, #3498db);
+  background-image: -ms-linear-gradient(top, #25343d, #3498db);
+  background-image: -o-linear-gradient(top, #25343d, #3498db);
+  background-image: linear-gradient(to bottom, #25343d, #3498db);
+  text-decoration: none;
+  box-shadow: inset 0 0 0 1px #27496d,0 5px 15px #193047;
+  
+}
+
+.clockdiv{
+	
+	      position: absolute;
+    float: left;
+    padding: 10px;
+    background-color:#f2f2f2;
+     text-align: center;
+     width: 360px; 
+       height: 100px;
+    overflow: visible;
+    margin-top: 100px;
+    margin-left: 500px;
+    border-radius: 4px;
+    opacity:0.9;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 1;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.calendardiv{
+      position: relative ;
+    float: left;
+    padding: 20px;
+    background-color:#f2f2f2;
+     text-align: center;
+     width: 42.5%; 
+       height: 330px;
+    overflow: visible;
+    margin-top: 160px;
+    margin-left: 30px;
+    border-radius: 4px;
+    opacity:0.9;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 1;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.weatherdiv{
+      position: relative ;
+    float: left;
+    padding: 20px;
+    background-color:#f2f2f2;
+     text-align: center;
+     width: 42.5%; 
+       height: 330px;
+    overflow: visible;
+    margin-top: 160px;
+    margin-left: 30px;
+    border-radius: 4px;
+    opacity:0.9;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    z-index: 1;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
+.clockdiv:hover,.calendardiv:hover ,.weatherdiv:hover{
+	background-color:#999999;
+	z-index:50;
+
+  -webkit-transform:scale(1.05); /* Safari and Chrome */
+    -moz-transform:scale(1.05); /* Firefox */
+    -ms-transform:scale(1.05); /* IE 9 */
+    -o-transform:scale(1.05); /* Opera */
+     transform:scale(1.05);
+} 
